@@ -1,18 +1,23 @@
 #include "shell.h"
 
-std::set<std::string> commands = {"echo", "type", "exit"};
-std::set<std::string> PATH_DIRS = _PATH_dirs();
+// All the builtin commands
+std::vector<std::string> commands = {"echo", "type", "exit", "pwd"};
+
+// All the directory in the PATH environemntal variable
+std::vector<std::string> PATH_DIRS = _PATH_dirs();
 
 // Read-Eval-Print Loop
 // Main Loop for the shell
 void repl() {
-    std::cout << "$ ";
+    // the shell will have a > at each new line similar to `anuk@laptop ~` in bash 
+    std::cout << "> ";
+
+    // read a line
     std::string input;
     std::getline(std::cin, input);
 
     if (!input.empty()) {
         command_handler(input, PATH_DIRS, commands);
-        return;
     }
 }
 
